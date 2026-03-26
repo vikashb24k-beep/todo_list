@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const startScheduler = require("./scheduler");
+const { verifyEmailTransport } = require("./utils/emailService");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -54,6 +55,7 @@ async function startServer() {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("[DB] MongoDB connected");
 
+    await verifyEmailTransport();
     startScheduler();
 
     app.listen(PORT, () => {
