@@ -43,14 +43,6 @@ JWT_SECRET=replace_with_a_strong_secret
 MAIL_PROVIDER=resend
 EMAIL_FROM=onboarding@resend.dev
 RESEND_API_KEY=re_your_resend_api_key
-EMAIL_USER=your_gmail@gmail.com
-EMAIL_PASS=your_gmail_app_password
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=465
-SMTP_SECURE=true
-SMTP_CONNECTION_TIMEOUT=15000
-SMTP_GREETING_TIMEOUT=10000
-SMTP_SOCKET_TIMEOUT=20000
 REMINDER_TIMEZONE=Asia/Kolkata
 REMINDER_GRACE_MINUTES=2
 PORT=5000
@@ -107,6 +99,7 @@ npm run dev
 ## Notes
 - Cron scheduler checks every minute in `REMINDER_TIMEZONE` and supports a short catch-up window using `REMINDER_GRACE_MINUTES` (useful after deploy restarts).
 - For production email delivery with Resend, verify your sending domain and set `EMAIL_FROM` to that domain address.
+- SMTP fallback is still supported for advanced use by setting `MAIL_PROVIDER=smtp` and SMTP-specific variables.
 - Duplicate email sends are prevented using `lastNotified`.
 - Each user can manage only their own tasks.
 - Browser notifications can be enabled from dashboard.
