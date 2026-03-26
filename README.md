@@ -8,7 +8,7 @@ A production-ready MERN app with JWT auth, per-user tasks, cron-based email remi
 - Database: MongoDB + Mongoose
 - Auth: JWT + bcrypt
 - Scheduler: node-cron (runs every minute)
-- Email: Nodemailer (Gmail SMTP)
+- Email: Resend API (default) or Nodemailer SMTP fallback
 - UI: Tailwind CSS + react-hot-toast
 
 ## Folder Structure
@@ -40,6 +40,9 @@ Use `backend/.env.example` as a template.
 ```env
 MONGO_URI=mongodb://127.0.0.1:27017/smart_reminder
 JWT_SECRET=replace_with_a_strong_secret
+MAIL_PROVIDER=resend
+EMAIL_FROM=onboarding@resend.dev
+RESEND_API_KEY=re_your_resend_api_key
 EMAIL_USER=your_gmail@gmail.com
 EMAIL_PASS=your_gmail_app_password
 SMTP_HOST=smtp.gmail.com
@@ -103,6 +106,7 @@ npm run dev
 
 ## Notes
 - Cron scheduler checks every minute in `REMINDER_TIMEZONE` and supports a short catch-up window using `REMINDER_GRACE_MINUTES` (useful after deploy restarts).
+- For production email delivery with Resend, verify your sending domain and set `EMAIL_FROM` to that domain address.
 - Duplicate email sends are prevented using `lastNotified`.
 - Each user can manage only their own tasks.
 - Browser notifications can be enabled from dashboard.
